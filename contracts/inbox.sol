@@ -1,13 +1,15 @@
-pragma solidity ^0.8
+// SPDX-License-Identifier: UNLICENSED
 
-contract Inbox{
+pragma solidity ^0.7.0;
+
+contract Inbox {
     string public message;
 
-    function Inbox(string initialMessage)public{
+    constructor(string memory initialMessage) {
         message = initialMessage;
     }
 
-    function setMessage(string newMessage)public{
+    function setMessage(string memory newMessage) public {
         message = newMessage;
     }
 }

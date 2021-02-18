@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ahmad1091/ethOne/issues"
   },
-  "homepage": "https://github.com/ahmad1091/ethOne#readme"
+  "homepage": "https://github.com/ahmad1091/ethOne#readme",
+  "dependencies": {
+    "solc": "^0.8.1"
+  }
 }

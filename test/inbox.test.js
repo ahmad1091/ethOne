@@ -4,7 +4,7 @@ const Web3 = require("web3");
 const compiledContract = require("../compile");
 const web3 = new Web3(ganache.provider());
 
-const byecode = compiledContract.evm.bytecode.object;
+const bytecode = compiledContract.evm.bytecode.object;
 const abi = compiledContract.abi;
 let accounts;
 let inbox;
@@ -16,7 +16,7 @@ beforeEach(async () => {
 
   inbox = await new web3.eth.Contract(abi)
     .deploy({
-      data: byecode,
+      data: bytecode,
       arguments: ["hi--there"],
     })
     .send({ from: accounts[0], gas: "1000000" });

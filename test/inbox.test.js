@@ -13,17 +13,6 @@ beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
   //use one of those accounts to deploy
   //the contract
-  //   web3.eth.getAccounts().then((accounts) => {
-  //     new web3.eth.Contract(abi)
-  //       .deploy({
-  //         data: byecode,
-  //         arguments: ["hi--there"],
-  //       })
-  //       .send({ from: accounts[1], gas: "1000000" })
-  //       .then((res) => {
-  //         inbox = res;
-  //       });
-  //   });
 
   inbox = await new web3.eth.Contract(abi)
     .deploy({
@@ -32,33 +21,20 @@ beforeEach(async () => {
     })
     .send({ from: accounts[0], gas: "1000000" });
 });
-// console.log(byecode, abi);
-// 'abi',=>[ '0', '1', '2' ]
-// 'devdoc',=>[ 'kind', 'methods', 'version' ]
-// 'evm',=>[
-//   'assembly',
-//   'bytecode',
-//   'deployedBytecode',
-//   'gasEstimates',
-//   'legacyAssembly',
-//   'methodIdentifiers'
-// ]
-// 'ewasm',
-// 'metadata',
-// 'storageLayout',
-// 'userdoc'
+
 describe("Inbox", () => {
   it("deploys a contract", () => {
     assert.ok(inbox.options.address);
   });
+
   it("has default message", async () => {
     const message = await inbox.methods.message().call();
     assert.strictEqual(message, "hi--there");
   });
+
   it("can set new msg", async () => {
     await inbox.methods.setMessage("ethOne").send({ from: accounts[0] });
     const message = await inbox.methods.message().call();
-
     assert.strictEqual(message, "ethOne");
   });
 });

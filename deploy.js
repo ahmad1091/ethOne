@@ -1,4 +1,4 @@
-const HDWalletProvider = require("truffle-hdwallet-provider");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 const Web3 = require("web3");
 const compiledContract = require("./compile");
 
@@ -22,33 +22,25 @@ let provider = new HDWalletProvider({
 const web3 = new Web3(provider);
 
 const deploy = async () => {
-  // const accounts = await web3.eth.getAccounts();
-  // console.log("fnara 123123", accounts[0]);
-  // const inbox = await new web3.eth.Contract(abi)
-  //   .deploy({
-  //     data: bytecode,
-  //     arguments: ["hi..."],
-  //   })
-  //   .send({
-  //     form: accounts[0],
-  //     gas: "1000000",
-  //   });
-
-  web3.eth.getAccounts().then((accounts) => {
+  try {
+    const accounts = await web3.eth.getAccounts();
     console.log("fnara 123123", accounts[0]);
-    new web3.eth.Contract(abi)
+    const inbox = await new web3.eth.Contract(abi)
       .deploy({
         data: bytecode,
         arguments: ["hi..."],
       })
       .send({
-        form: accounts[0],
         gas: "1000000",
-      })
-      .then((result) => {
-        console.log("address::::", result.options.address);
+        from: accounts[0],
       });
-  });
+    console.log(
+      "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      inbox.options.address
+    );
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 deploy();

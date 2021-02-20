@@ -7,10 +7,7 @@ const abi = compiledContract.abi;
 
 const mnemonicPhrase =
   "carbon tower feel armed margin furnace nothing false course nature glance coyote";
-// const provider = new HDWalletProvider(
-//   "carbon tower feel armed margin furnace nothing false course nature glance coyote",
-//   "https://rinkeby.infura.io/v3/190d2e2670274a3183a86804ddee1ee3"
-// );
+
 let provider = new HDWalletProvider({
   mnemonic: {
     phrase: mnemonicPhrase,
@@ -24,7 +21,9 @@ const web3 = new Web3(provider);
 const deploy = async () => {
   try {
     const accounts = await web3.eth.getAccounts();
+
     console.log("fnara 123123", accounts[0]);
+
     const inbox = await new web3.eth.Contract(abi)
       .deploy({
         data: bytecode,
@@ -34,10 +33,8 @@ const deploy = async () => {
         gas: "1000000",
         from: accounts[0],
       });
-    console.log(
-      "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-      inbox.options.address
-    );
+
+    console.log("Adress =>", inbox.options.address);
   } catch (err) {
     console.error(err);
   }
